@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ideas</title>
+    <link rel="stylesheet" href="vendors/bulma.css">
+    <!--<link rel="stylesheet" href="app/css/style.css">-->
+</head>
+<body>
+
+<div class="container">
+    <!--<div class="columns is-mobile is-1">-->
+        <!--<div class="column">-->
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <h1 class="title">Yesterday</h1>
+            <div class="tile is-ancestor">
+                <div class="tile notification is-primary">
+                    1<!-- The magical tile element! -->
+                </div>
+            </div>
+        </div>
+        <!--<div class="column">-->
+        <div class="tile is-parent">
+            <h1 class="title">Today</h1>
+            <div class="tile is-ancestor">
+                <div class="tile">
+                    1<!-- The magical tile element! -->
+                </div>
+            </div>
+        </div>
+        <!--<div class="column">-->
+        <div class="tile is-parent">
+            <h1 class="title">Tomorrow</h1>
+            <div class="tile is-ancestor">
+                <div class="tile">
+                    1<!-- The magical tile element! -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="vendors/babel.js"></script>
+<script src="vendors/pouchdb.js"></script>
+
+<script src="app/register-service-worker.js"></script>
+
+<script type="text/babel" src="app/store.js"></script>
+<script type="text/babel" src="app/app.js"></script>
+<script type="text/babel">
+    new IdeasStore(new Store('ideas', "http://localhost:5984", () => {
+        this.refresh();
+    }));
+</script>
+
+</body>
+</html>

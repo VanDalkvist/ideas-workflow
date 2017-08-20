@@ -1,0 +1,10 @@
+CACHE MANIFEST
+# v1 2017-21-08
+
+CACHE:
+index.html
+app/css/style.css
+vendors/babel.js
+vendors/pouchdb.js
+app/store.js
+app/app.js

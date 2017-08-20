@@ -1,0 +1,23 @@
+{
+  "name": "ideas",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "serve": "npm-run-all -p serve-front serve-backend",
+    "serve-front": "http-server -o",
+    "serve-backend": "pouchdb-server -d db"
+  },
+  "devDependencies": {
+    "babel-standalone": "^6.26.0",
+    "gulp": "^3.9.1",
+    "gulp-main-npm-files": "^1.0.5",
+    "http-server": "^0.10.0",
+    "npm-run-all": "^4.0.2"
+  },
+  "dependencies": {
+    "bulma": "^0.5.1",
+    "pouchdb": "^6.0.7",
+    "pouchdb-server": "^2.3.7",
+    "requirejs": "^2.3.4"
+  }
+}
