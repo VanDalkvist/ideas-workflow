@@ -12,3 +12,10 @@ var app = new Vue({
 function _buildNote(name) {
     return { name: name, description: 'Text' + name };
 }
+
+import Store from 'app/store.js'
+import IdeasStore from 'app/app.js'
+
+new IdeasStore(new Store('ideas', "http://localhost:5984", () => {
+    this.refresh();
+}));

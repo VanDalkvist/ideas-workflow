@@ -1,10 +1,9 @@
 CACHE MANIFEST
-# v1 2017-21-08
-
-CACHE:
-index.html
-app/css/style.css
-vendors/babel.js
-vendors/pouchdb.js
-app/store.js
-app/app.js
+/app/app.js
+/app/css/style.css
+/app/register-service-worker.js
+/app/store.js
+/index.html
+/index.js
+/service-worker.js
+#822e3323b8ad3162db965e2a5a202730

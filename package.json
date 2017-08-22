@@ -5,20 +5,29 @@
   "scripts": {
     "serve": "npm-run-all -p serve-front serve-backend",
     "serve-front": "http-server -o",
-    "serve-backend": "pouchdb-server -d db"
+    "serve-backend": "pouchdb-server -d db",
+    "appcache": "appcache-manifest \"public/**/*.{html,css,js}\" -o public/ideas.appcache",
+    "webpack": "webpack"
   },
   "devDependencies": {
+    "appcache-manifest": "^2.1.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-standalone": "^6.26.0",
-    "gulp": "^3.9.1",
-    "gulp-main-npm-files": "^1.0.5",
-    "http-server": "^0.10.0",
-    "npm-run-all": "^4.0.2"
+    "copy-webpack-plugin": "^4.0.1",
+    "npm-run-all": "^4.0.2",
+    "webpack": "^3.5.5"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "bulma": "^0.5.1",
+    "http-server": "^0.10.0",
     "pouchdb": "^6.0.7",
     "pouchdb-server": "^2.3.7",
-    "requirejs": "^2.3.4",
     "vue": "^2.4.2"
   }
 }
