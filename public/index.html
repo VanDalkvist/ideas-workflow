@@ -17,10 +17,13 @@
                     <div class="tile is-parent is-vertical">
                         <div v-for="note in day.data"
                              class="tile notification is-primary">
-                            <div class="content">
-                                <h2>{{note.name}}</h2>
-                                <p>{{note.description}}</p>
-                            </div>
+
+                            <note-view v-bind:note="note"></note-view>
+
+                            <!--<div class="content">-->
+                                <!--<h2>{{note.name}}</h2>-->
+                                <!--<p>{{note.description}}</p>-->
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@
         paths: {
             Vue: './vendors/vue',
             PouchDB: './vendors/pouchdb',
+            text: './vendors/text'
         }
     });
 

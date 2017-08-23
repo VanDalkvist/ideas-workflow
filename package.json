@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "requirejs": "^2.3.5",
+    "requirejs-text": "^2.0.15",
     "bulma": "^0.5.1",
     "pouchdb": "^6.0.7",
     "pouchdb-server": "^2.3.7",
