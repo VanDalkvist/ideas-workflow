@@ -4,7 +4,8 @@ const CSS = [
 
 const JS = [
     'vue/dist/vue.js',
-    'pouchdb/dist/pouchdb.js'
+    'pouchdb/dist/pouchdb.js',
+    'requirejs/require.js'
 ];
 
 module.exports = [...JS, ...CSS];
