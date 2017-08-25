@@ -11,7 +11,15 @@
     });
 
     requirejs(['index'], function (app) {
-        app.initialize('#app');
+        var instance = app.initialize('#app');
+
+        instance.now.today.items = [1, 2, 3, 4, 5].map(_buildTestNote);
+        instance.now.yesterday.items = [1, 2, 3].map(_buildTestNote);
+        instance.now.tomorrow.items = [1, 2].map(_buildTestNote);
+
+        function _buildTestNote(name) {
+            return { name: name, description: 'Text' + name };
+        }
     });
 
 })();

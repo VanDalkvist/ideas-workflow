@@ -5,12 +5,12 @@ define(['PouchDB'], function (PouchDB) {
     function Store(name, remote, onChange) {
         this.db = new PouchDB(name);
 
-        let settings = {
+        var settings = {
             live: true,
             retry: true
         };
 
-        PouchDB.sync(name, `${remote}/${name}`, settings).on('change', info => {
+        PouchDB.sync(name, remote + '/' + name, settings).on('change', function (info) {
             onChange(info);
         });
     }
@@ -21,6 +21,7 @@ define(['PouchDB'], function (PouchDB) {
     Store.prototype.add = _add;
     Store.prototype.update = _update;
     Store.prototype.remove = _remove;
+    Store.prototype.changeNew = _changeNew;
 
     return Store;
 
@@ -53,6 +54,15 @@ define(['PouchDB'], function (PouchDB) {
             Object.assign(updatingItem, item);
             return db.put(updatingItem);
         });
+    }
+
+    function _changeNew(item) {
+        // let db = this.db;
+        //
+        // return db.get(item._id).then(updatingItem => {
+        //     Object.assign(updatingItem, item);
+        //     return db.put(updatingItem);
+        // });
     }
 
     function _remove(id) {

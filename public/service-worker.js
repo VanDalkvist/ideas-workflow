@@ -1,5 +1,6 @@
-var CACHE_NAME = 'ideas-v1';
+var CACHE_NAME = 'ideas';
 
+// todo:
 var resourcesToCache = [
     '/',
     '/app/css/style.css',
@@ -10,36 +11,36 @@ var resourcesToCache = [
     '/app/app.js',
 ];
 
-self.addEventListener('install', function(event) {
-    console.info('installing service worker');
+self.addEventListener('install', function (event) {
+    console.info('Installing service worker...');
 
+    var opener = caches.open(CACHE_NAME);
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(function(cache) {
-                console.info('cache opened');
+        opener.then(function (cache) {
+            console.info('Cache opened');
 
-                return cache.addAll(resourcesToCache);
-            })
+            return cache.addAll(resourcesToCache);
+        })
     );
 });
 
-self.addEventListener('activate', function(event) {
-    console.info('service worker activated');
+self.addEventListener('activate', function (event) {
+    console.info('Service worker was activated.');
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function (event) {
+    var request = event.request;
+    var matcher = caches.match(request);
+
     event.respondWith(
-        caches.match(event.request)
-            .then(function(response) {
-                console.log('request:', event.request);
+        matcher.then(function (response) {
+            if (response) {
+                console.info('Get cached response for request: ', request);
+                return response;
+            }
 
-                if (response) {
-                    console.info('cache hit');
-                    return response;
-                }
-
-                console.info('fetching');
-                return fetch(event.request);
-            })
+            console.info('Fetching ' + request);
+            return fetch(request);
+        })
     );
 });
