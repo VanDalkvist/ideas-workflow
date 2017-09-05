@@ -82,3 +82,9 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Project-specific
+db/
+dist/
+vendors/
+log.txt
