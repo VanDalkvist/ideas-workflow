@@ -10,20 +10,15 @@
 <section id="app" class="section">
     <div class="container">
         <div class="columns is-mobile is-centered">
-            <div v-for="day in days"
+            <div v-for="day in now"
                  class="column has-text-centered">
                 <h1 class="title">{{day.name}}</h1>
                 <div class="tile is-ancestor">
                     <div class="tile is-parent is-vertical">
-                        <div v-for="note in day.data"
+                        <div v-for="note in day.items"
                              class="tile notification is-primary">
-
-                            <note-view v-bind:note="note"></note-view>
-
-                            <!--<div class="content">-->
-                                <!--<h2>{{note.name}}</h2>-->
-                                <!--<p>{{note.description}}</p>-->
-                            <!--</div>-->
+                            <note-view v-bind:note="note"
+                                       v-bind:actions="{ toggle: toggleMode.bind(null, note) }"></note-view>
                         </div>
                     </div>
                 </div>

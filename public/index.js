@@ -1,16 +1,23 @@
 'use strict';
 
-define(['Vue', 'app/notes/notes', 'app/core/store'], function (Vue, Notes, Store) {
+define([
+    'Vue',
+    'app/notes/notes', 'app/core/store', 'app/actions'
+], function (Vue, Notes, Store, Actions) {
 
-    // Vue.component('note-view', {
-    //     props: ['todo'],
-    //     template: ''
-    // })
-
-    Vue.component('note-view', function (resolve) {
-        require(['text!app/note/note.view.html'], function (template) {
-            resolve({ template: template });
-        });
+    Vue.component('note-view', {
+        props: ['note', 'actions'],
+        template:
+            "<div class='content'>" +
+                "<a class='button' v-on:click='toggleMode'><span class='panel-icon'>Edit</span></a>" +
+                "<h2>{{note.name}}</h2>" +
+                "<p>{{note.description}}</p>" +
+            "</div>",
+        methods: {
+            toggleMode: function () {
+                this.actions.toggle();
+            }
+        }
     });
 
     var stores = {};
@@ -27,28 +34,29 @@ define(['Vue', 'app/notes/notes', 'app/core/store'], function (Vue, Notes, Store
 
     function _initialize(selector) {
 
+        var days = [
+            { name: 'Yesterday', type: 'yesterday', items: [] },
+            { name: 'Today', type: 'today', items: [], new: {} },
+            { name: 'Tomorrow', type: 'tomorrow', items: [], new: {} }
+        ];
+
         var instance = new Vue({
             el: selector,
             data: {
-                now: {
-                    yesterday: { name: 'Yesterday', type: 'yesterday', items: [] },
-                    today: { name: 'Today', type: 'today', items: [], new: {} },
-                    tomorrow: { name: 'Tomorrow', type: 'tomorrow', items: [], new: {} }
-                },
+                now: days,
                 past: { name: 'Past', type: 'past', items: [] },
-                future : { name: 'Future', type: 'future', items: [] }
+                future: { name: 'Future', type: 'future', items: [] }
             },
             methods: {
+                toggleMode: function (note, store) {
+                    note.template = note.template === 'edit-view' ? 'details-view' : 'edit-view';
+                    // store.save(note);
+                },
                 moveNote: function _moveNote(from, to, note) {
                     var fromStore = _getStore(from.type);
                     var toStore = _getStore(to.type);
 
-                    return fromStore.remove(note.id).then(function () {
-                        delete note._id;
-                        return toStore.add(note);
-                    }).finally(function () {
-                        // loading(false);
-                    });
+                    return Actions.MoveAction.apply(note, fromStore, toStore);
                 },
                 addNote: function _addNote(list, note) {
                     var store = _getStore(list.type);
